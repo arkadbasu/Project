@@ -17,6 +17,19 @@ This project enables TWR between two Raspberry Pi devices using DWM3000 UWB modu
 2. Install required Python packages: `spidev`, `RPi.GPIO`, `numpy`.
 3. Run the example scripts in `drone/` and `beacon/`.
 
+## DW3000 Driver Library
+Qorvo’s DW3000 API in C is required for full TWR, because:
+
+Timestamp registers are 40-bit and not easily SPI-readable in Python
+
+Correct frame format, ranging response logic, and error handling are all embedded
+
+git clone https://github.com/lucasbernal/dwm3000-raspberrypi.git
+cd dwm3000-raspberrypi
+mkdir build && cd build
+cmake ..
+make
+
 ## Wiring Diagram
 - **DWM3000 <-> Raspberry Pi**
   - VCC  <-> 3.3V

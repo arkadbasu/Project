@@ -21,7 +21,7 @@ GPIO.setup(IRQ_PIN, GPIO.IN)
 
 # Example: Read device ID
 GPIO.output(CS_PIN, GPIO.LOW)
-resp = spi.xfer2([0x00, 0x00, 0x00, 0x00])  # Replace with actual DWM3000 register read
+resp = spi.xfer2([0xde, 0xca, 0x00, 0x01])  # Before it was 0x00, 0x00, 0x00, 0x00
 GPIO.output(CS_PIN, GPIO.HIGH)
 print('DWM3000 response:', resp)
 
@@ -37,7 +37,7 @@ def wait_for_response(spi, cs_pin, timeout=0.1):
     start = time.time()
     while time.time() - start < timeout:
         GPIO.output(cs_pin, GPIO.LOW)
-        resp = spi.xfer2([0x05, 0x00, 0x00, 0x00])  # Example read
+        resp = spi.xfer2([0xde, 0xca, 0x00, 0x01])  # Change to actual
         GPIO.output(cs_pin, GPIO.HIGH)
         if resp[0] != 0x00:
             print('Response received:', resp)
